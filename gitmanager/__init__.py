@@ -1,14 +1,14 @@
 '''
-Git Project Manager
+Git Manager Tool
 
 Usage:
-  gp -l | --list
-  gp -n | --new
-  gp -b | --bug
-  gp -s | --show <id>
-  gp -c | --close <id>
-  gp -h | --help
-  gp -v | --version
+  gm -l | --list
+  gm -n | --new
+  gm -b | --bug
+  gm -s | --show <id>
+  gm -c | --close <id>
+  gm -h | --help
+  gm -v | --version
 
 Options:
   -l --list     Show issues list from current Milestone
@@ -20,19 +20,19 @@ Options:
   -v --version     Show version.
 '''
 
-import os
 import sys
-import yaml
-
-import gitlab
 from docopt import docopt
-from github import Github
+
+from .handler import run_handler
+
+
+# ─── MAIN ───────────────────────────────────────────────────────────────────────
 
 def main():
     arguments = docopt(__doc__)
 
     try:
-        print(arguments)
+        run_handler(arguments)
     except KeyboardInterrupt:
         sys.exit("Exiting...")
     except Exception as e:
