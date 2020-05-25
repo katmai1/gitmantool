@@ -1,3 +1,6 @@
 /build/
 /dist/
 /gitmantool.egg-info/
+*.pyc
+/.vscode/
+/old/

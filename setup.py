@@ -1,11 +1,13 @@
 import setuptools
 
+VERSION = 0.1
+
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="gitmantool", # Replace with your own username
-    version="0.0.3",
+    version=str(VERSION),
     author='katmai',  # Optional
     author_email='katmai.mobil@gmail.com',  # Optional
     description='Console tool for manage projects on github/gitlab',
@@ -22,4 +24,7 @@ setuptools.setup(
             'gm=gitmanager:main',
         ],
     },
+    install_requires=[
+        'yaml', 'docopt', 'pygithub', 'gitlab'
+    ],
 )
