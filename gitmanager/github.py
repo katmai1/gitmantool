@@ -5,7 +5,7 @@ from .settings import CredsManager
 
 class GithubClient:
     
-    TOKEN_GITHUB = "93c99f4e4cb4a78a9e9fcc3fe1208d5809cbf201"
+    TOKEN_GITHUB = "20544cb8e1a3169bff33d9284720d90f5f92a6fb"
 
     def __init__(self, cfg):
         #self.creds = CredsManager()
