@@ -5,3 +5,4 @@
 /.vscode/
 /old/
 *.cpython-37.pyc
+*.gm
