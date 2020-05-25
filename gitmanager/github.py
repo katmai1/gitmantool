@@ -8,21 +8,23 @@ class GithubClient:
     TOKEN_GITHUB = "93c99f4e4cb4a78a9e9fcc3fe1208d5809cbf201"
 
     def __init__(self, cfg):
-        self.creds = CredsManager()
+        #self.creds = CredsManager()
+       # print(self.creds.get_token("github"))
         self.SRV = cfg.server
         self.USR = cfg.username
         self.REPO = cfg.repo
         self.link = cfg.link
 
         self.g = Github(self.TOKEN_GITHUB)
-        self.r = self.g.get_repo(self.USR + "/" + self.REPO)
+        print("conecta")
+        print(self.USR)
+        print(self.REPO)
+        repo = f"{self.USR}/{self.REPO}"
+        self.r = self.g.get_repo(repo)
+        print("getrepo")
 
 
     # ─── COMMANDS ───────────────────────────────────────────────────────────────────
-    def _get_token(self):
-        # check exists
-        # add token if not exist
-        # return token        
 
     def list_issues(self):
         for i in self.open_issues:        

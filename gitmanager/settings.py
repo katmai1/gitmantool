@@ -52,8 +52,20 @@ class CredsManager:
     def __init__(self):
         self.creds_folder = os.environ["HOME"] + "/.gitmanager/"
         self.creds_file = "creds.yaml"
-        self.creds_full_path = creds_folder + creds_file
-
+        self.creds_full_path = self.creds_folder + self.creds_file
+        if not self.exist:
+            sys.exit("El archivo de credeciales no existe")
+    
     @property
     def exist(self):
         return os.path.isfile(self.creds_full_path)
+    
+    def get_token(self, server):
+        try:
+            with open(self.creds_full_path, "r") as f:
+                data = yaml.load(f, Loader=yaml.FullLoader)
+        except Exception as e:
+            print(f"error al leer creds: {e}")
+            sys.exit()
+        else:
+            return data[server]

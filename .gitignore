@@ -1,8 +1,7 @@
 /build/
 /dist/
 /gitmantool.egg-info/
-*.pyc
+*/*.pyc
 /.vscode/
 /old/
-*.cpython-37.pyc
 *.gm
