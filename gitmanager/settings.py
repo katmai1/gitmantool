@@ -59,13 +59,15 @@ class CredsManager:
     @property
     def exist(self):
         return os.path.isfile(self.creds_full_path)
-    
+
     def get_token(self, server):
         try:
             with open(self.creds_full_path, "r") as f:
                 data = yaml.load(f, Loader=yaml.FullLoader)
         except Exception as e:
-            print(f"error al leer creds: {e}")
-            sys.exit()
+            print(e)
+            sys.exit("error al leer creds")
         else:
+            if data[server] is None:
+                sys.exit("Token no configurado")
             return data[server]

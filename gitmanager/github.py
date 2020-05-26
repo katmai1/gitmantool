@@ -5,17 +5,15 @@ from .settings import CredsManager
 
 class GithubClient:
     
-    TOKEN_GITHUB = "20544cb8e1a3169bff33d9284720d90f5f92a6fb"
-
     def __init__(self, cfg):
         self.creds = CredsManager()
-        print(self.creds.get_token("github"))
+        self.TOKEN = self.creds.get_token("github")
         self.SRV = cfg.server
         self.USR = cfg.username
         self.REPO = cfg.repo
         self.link = cfg.link
 
-        self.g = Github(self.TOKEN_GITHUB)
+        self.g = Github(self.TOKEN)
         repo = f"{self.USR}/{self.REPO}"
         self.r = self.g.get_repo(repo)
 
