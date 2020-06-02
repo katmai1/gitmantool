@@ -1,0 +1,4 @@
+docopt
+pygithub
+gitlab
+pyyaml

@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="gitmantool", # Replace with your own username
+    name="gitmantool",
     version=str(get_version()),
-    author='katmai',  # Optional
-    author_email='katmai.mobil@gmail.com',  # Optional
+    author='katmai',
+    author_email='katmai.mobil@gmail.com',
     description='Console tool for manage projects on github/gitlab',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -18,12 +18,12 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
     ],
     python_requires='>=3.6',
-    entry_points={  # Optional
+    entry_points={
         'console_scripts': [
             'gm=gitmanager:main',
         ],
     },
     install_requires=[
-        'docopt', 'pygithub', 'gitlab'
+        'docopt', 'pygithub', 'gitlab', 'pyyaml'
     ],
 )

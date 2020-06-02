@@ -2,17 +2,18 @@ import yaml
 import os
 import sys
 
+
 # ─── SETTINGS CLASS ─────────────────────────────────────────────────────────────
 
 class SettingsFile:
-    NAME = "settings.gm"
     
+    NAME = "settings.gm"
 
     def create(self):
         print("Settings file not exist, creating...")
         link = input("Input link of git server: ")
-        with open(self.NAME, 'w') as f: 
-            yaml.dump({ "link": link }, f, default_flow_style=False)
+        with open(self.NAME, 'w') as f:
+            yaml.dump({"link": link}, f, default_flow_style=False)
 
     @property
     def link(self):
@@ -24,7 +25,7 @@ class SettingsFile:
             sys.exit()
         else:
             return data['link']
-    
+
     @property
     def exist(self):
         return os.path.isfile(self.NAME)
@@ -32,11 +33,11 @@ class SettingsFile:
     @property
     def server(self):
         return self.link.split("/")[2]
-    
+
     @property
     def username(self):
         return self.link.split("/")[3]
-    
+
     @property
     def repo(self):
         return self.link.split("/")[4]
@@ -55,7 +56,7 @@ class CredsManager:
         self.creds_full_path = self.creds_folder + self.creds_file
         if not self.exist:
             sys.exit("El archivo de credeciales no existe")
-    
+
     @property
     def exist(self):
         return os.path.isfile(self.creds_full_path)

@@ -1,7 +1,14 @@
 # gitmanager
 Console tool for manage projects on github/gitlab
 
+## Installation
+
+'pip install gitmanager'
+
 ## Usage
+
+Go to your project folder and execute the new gm command
+First time ask for link of your repo, for example: https://github.com/katmai1/gitmanager
 
 
 ## Developer section
@@ -22,4 +29,4 @@ Build package:
 
 Upload 
     
-    twine upload -r pypi --skip-existing dist/*'
+    twine upload -r pypi --skip-existing dist/*
