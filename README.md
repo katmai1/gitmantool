@@ -21,11 +21,10 @@ First time ask for link of your repo, for example: https://github.com/katmai1/gi
 
 ## Development
 
-How generate a new version
+How to generate a new version
 
 - Assign version number on file [setup.py](setup.py)
-
-- `git commit all changes`
+- Commit all changes
 - `git tag 0.1 -m "tag description"`
 - `git push --tags origin master`
 
