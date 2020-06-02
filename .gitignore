@@ -1,2 +1,4 @@
 /settings.gm
-/.vscode/settings.json
+/.vscode/
+/gitmanager/__pycache__/
+/gitmantool.egg-info/

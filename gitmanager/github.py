@@ -1,6 +1,6 @@
 from github import Github
 
-from .settings import CredsManager
+from .utils import CredsManager
 
 
 class GithubClient:

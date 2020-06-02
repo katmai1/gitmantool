@@ -1,5 +1,5 @@
 import setuptools
-from gitmanager.version import get_version
+from gitmanager.utils import get_version
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
