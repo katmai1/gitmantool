@@ -24,6 +24,6 @@ setuptools.setup(
         ],
     },
     install_requires=[
-        'docopt', 'pygithub', 'gitlab', 'pyyaml'
+        'docopt', 'pygithub', 'gitlab', 'pyyaml', 'colorama'
     ],
 )

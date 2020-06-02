@@ -2,6 +2,8 @@ import yaml
 import os
 import sys
 
+from colorama import Fore, Style
+
 
 # ─── SETTINGS CLASS ─────────────────────────────────────────────────────────────
 
@@ -48,31 +50,52 @@ class SettingsFile:
 
 # ─── CREDENTIALS MANAGER ────────────────────────────────────────────────────────
 
+# Clase encargada de gestionar el fichero de credenciales
 class CredsManager:
-    # Clase encargada de gestionar el fichero de credenciales
-    CREDS_PATH = os.environ["HOME"] + "/.gitmanager/"
-    CREDS_FILENAME = "creds.yaml"
+
+    CREDS_FOLDER = os.environ["HOME"] + "/.gitmanager"
+    CREDS_FILE = "creds.yaml"
 
     def __init__(self):
-        self.creds_full_path = self.CREDS_PATH + self.CREDS_FILENAME
+        self.CREDS_PATH = f"{self.CREDS_FOLDER}/{self.CREDS_FILE}"
         if not self.exist:
-            sys.exit("El archivo de credeciales no existe")
+            self._generate_basic_file()
+
+    def _generate_basic_file(self):
+        try:
+            print(" [i] Creating credentials file...")
+            os.system(f"mkdir -p {self.CREDS_FOLDER}")
+            os.system(f"touch {self.CREDS_PATH}")
+        except Exception as e:
+            print(e)
+            sys.exit(" [!] Can't create the credentials file")
+        else:
+            print("\n [i] Adding servers...")
+            tokens = {
+                "github": self.input_token("github"),
+                "gitlab": self.input_token("gitlab")
+            }
+            with open(self.CREDS_PATH, 'w') as f:
+                yaml.dump(tokens, f, default_flow_style=False)
 
     @property
     def exist(self):
-        return os.path.isfile(self.creds_full_path)
+        return os.path.isfile(self.CREDS_PATH)
 
     def get_token(self, server):
-        try:
-            with open(self.creds_full_path, "r") as f:
-                data = yaml.load(f, Loader=yaml.FullLoader)
-        except Exception as e:
-            print(e)
-            sys.exit("error al leer creds")
-        else:
+        with open(self.CREDS_PATH, "r") as f:
+            data = yaml.load(f, Loader=yaml.FullLoader)
             if data[server] is None:
-                sys.exit("Token no configurado")
+                print(" [!] Please add token on config file:")
+                print(f"\t{self.CREDS_PATH}")
+                sys.exit()
             return data[server]
+
+    def input_token(self, server):
+        token = input(f"   Input token for {server.title()}: ")
+        if len(token) == 0:
+            return None
+        return token
 
 # ────────────────────────────────────────────────────────────────────────────────
 
@@ -82,3 +105,21 @@ def get_version():
     with open('version.yaml', "r") as f:
         data = yaml.load(f, Loader=yaml.FullLoader)
     return data['version']
+
+
+def print_header():
+    print(f"{Fore.GREEN}{Style.DIM}# Git Manager Tool (v{get_version()})\n\n")
+
+
+def salir(mensaje=None):
+    if mensaje is not None:
+        print(f"{Fore.RED}[X]{Fore.RESET} {mensaje}\n")
+    sys.exit("Exiting...")
+
+
+def info(mensaje):
+    print(f"{Fore.BLUE}[i]{Fore.RESET} {mensaje}")
+
+
+def error(mensaje):
+    print(f" {Fore.RED}[i]{Fore.RESET} {mensaje}")

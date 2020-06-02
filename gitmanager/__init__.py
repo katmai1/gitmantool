@@ -22,13 +22,14 @@ Options:
 
 import sys
 from docopt import docopt
-
+from colorama import init
 from .handler import run_handler
 
 
 # ─── MAIN ───────────────────────────────────────────────────────────────────────
 
 def main():
+    init(autoreset=True)  # init colorama
     arguments = docopt(__doc__)
 
     try:

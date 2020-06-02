@@ -1,6 +1,6 @@
 import sys
 
-from .utils import SettingsFile, get_version
+from .utils import SettingsFile, get_version, print_header, salir, info, error
 from .github import GithubClient
 
 
@@ -13,26 +13,35 @@ def get_client():
     if config.server == "github.com":
         return GithubClient(config)
     else:
-        sys.exit("Server not implemented")
+        salir("Server not implemented")
 
 
 def run_handler(args):
-    client = get_client()
+    print_header()
 
     if args['--version']:
-        print(f"[i] Current version: {get_version()}")
+        info(f"Current version: {get_version()}")
+        sys.exit()
 
-    elif args['--list']:
+    client = get_client()
+
+    if args['--list']:
+        info("Listing all open issues from current Milestone...\n")
         client.list_issues()
 
     elif args['--new']:
+        info("Creating new generic isse...")
         client.new_issue([])
 
     elif args['--bug']:
+        info("Creating new bug isse...")
         client.new_issue(['bug'])
 
     elif args['--show'] and args['<id>'] is not None:
         client.show_issue(args['<id>'])
 
     elif args['--close'] and args['<id>'] is not None:
+        info("Closing issue...")
         client.close_issue(args['<id>'])
+
+    print("")

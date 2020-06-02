@@ -1,6 +1,8 @@
 from github import Github
 
-from .utils import CredsManager
+from colorama import Fore, Style
+
+from .utils import CredsManager, salir, info, error
 
 
 class GithubClient:
@@ -14,14 +16,20 @@ class GithubClient:
         self.link = cfg.link
 
         self.g = Github(self.TOKEN)
-        repo = f"{self.USR}/{self.REPO}"
-        self.r = self.g.get_repo(repo)
+        try:
+            self.r = self.g.get_repo(f"{self.USR}/{self.REPO}")
+        except Exception as e:
+            print(e.args)
+            salir("Github client can't connect")
 
     # ─── COMMANDS ───────────────────────────────────────────────────────────────────
 
     def list_issues(self):
-        for i in self.open_issues:        
-            print(f" [{i.number}] {i.title}")
+        issues_list = self.open_issues
+        for i in issues_list:
+            print(f"  {Style.BRIGHT}{i.number} {Style.DIM}{i.title.title()}")
+        if len(issues_list) == 0:
+            print(f"    {Style.DIM}There no open issues assigned at current Milestone ")
 
     def close_issue(self, id):
         issue = self.r.get_issue(number=int(id))
@@ -35,7 +43,7 @@ class GithubClient:
 
     def new_issue(self, labels):
         title = input("Input title: ")
-        body = input("Input contents: \n")
+        body = input("Input contents: ")
         self.r.create_issue(title=title, body=body, labels=labels)
 
     # ─── PROPERTIES ─────────────────────────────────────────────────────────────────
@@ -50,4 +58,3 @@ class GithubClient:
         return lista
 
 # ────────────────────────────────────────────────────────────────────────────────
-
