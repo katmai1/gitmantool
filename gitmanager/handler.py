@@ -1,7 +1,6 @@
 import sys
 
-from .version import get_version
-from .settings import SettingsFile
+from .utils import SettingsFile, get_version
 from .github import GithubClient
 
 
@@ -22,16 +21,16 @@ def run_handler(args):
 
     if args['--version']:
         print(f"[i] Current version: {get_version()}")
-    
+
     elif args['--list']:
         client.list_issues()
-    
+
     elif args['--new']:
         client.new_issue([])
-    
+
     elif args['--bug']:
         client.new_issue(['bug'])
-     
+
     elif args['--show'] and args['<id>'] is not None:
         client.show_issue(args['<id>'])
 

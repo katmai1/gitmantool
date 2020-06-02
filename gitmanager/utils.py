@@ -6,7 +6,7 @@ import sys
 # ─── SETTINGS CLASS ─────────────────────────────────────────────────────────────
 
 class SettingsFile:
-    
+
     NAME = "settings.gm"
 
     def create(self):
@@ -49,11 +49,12 @@ class SettingsFile:
 # ─── CREDENTIALS MANAGER ────────────────────────────────────────────────────────
 
 class CredsManager:
+    # Clase encargada de gestionar el fichero de credenciales
+    CREDS_PATH = os.environ["HOME"] + "/.gitmanager/"
+    CREDS_FILENAME = "creds.yaml"
 
     def __init__(self):
-        self.creds_folder = os.environ["HOME"] + "/.gitmanager/"
-        self.creds_file = "creds.yaml"
-        self.creds_full_path = self.creds_folder + self.creds_file
+        self.creds_full_path = self.CREDS_PATH + self.CREDS_FILENAME
         if not self.exist:
             sys.exit("El archivo de credeciales no existe")
 
@@ -72,3 +73,12 @@ class CredsManager:
             if data[server] is None:
                 sys.exit("Token no configurado")
             return data[server]
+
+# ────────────────────────────────────────────────────────────────────────────────
+
+
+# return current version
+def get_version():
+    with open('version.yaml', "r") as f:
+        data = yaml.load(f, Loader=yaml.FullLoader)
+    return data['version']

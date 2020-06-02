@@ -4,7 +4,7 @@ from .settings import CredsManager
 
 
 class GithubClient:
-    
+
     def __init__(self, cfg):
         self.creds = CredsManager()
         self.TOKEN = self.creds.get_token("github")
@@ -17,7 +17,6 @@ class GithubClient:
         repo = f"{self.USR}/{self.REPO}"
         self.r = self.g.get_repo(repo)
 
-
     # ─── COMMANDS ───────────────────────────────────────────────────────────────────
 
     def list_issues(self):
@@ -27,7 +26,7 @@ class GithubClient:
     def close_issue(self, id):
         issue = self.r.get_issue(number=int(id))
         issue.edit(state='closed')
-    
+
     def show_issue(self, id):
         issue = self.r.get_issue(number=int(id))
         print(issue.url)
@@ -38,7 +37,7 @@ class GithubClient:
         title = input("Input title: ")
         body = input("Input contents: \n")
         self.r.create_issue(title=title, body=body, labels=labels)
-    
+
     # ─── PROPERTIES ─────────────────────────────────────────────────────────────────
 
     @property
@@ -49,3 +48,6 @@ class GithubClient:
                 if i.milestone.state == "open":
                     lista.append(i)
         return lista
+
+# ────────────────────────────────────────────────────────────────────────────────
+
