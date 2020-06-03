@@ -4,6 +4,8 @@ import sys
 
 from colorama import Fore, Style
 
+VERSION = 0.5
+
 
 # ─── SETTINGS CLASS ─────────────────────────────────────────────────────────────
 
@@ -102,13 +104,14 @@ class CredsManager:
 
 # return current version
 def get_version():
-    try:
-        with open('gitmanager/version.yaml', "r") as f:
-            data = yaml.load(f, Loader=yaml.FullLoader)
-    except Exception as e:
-        print(e)
-    else:
-        return data['version']
+    # try:
+    #     with open('gitmanager/version.yaml', "r") as f:
+    #         data = yaml.load(f, Loader=yaml.FullLoader)
+    # except Exception as e:
+    #     print(e)
+    # else:
+    #     return data['version']
+    return VERSION
 
 
 def print_header():
