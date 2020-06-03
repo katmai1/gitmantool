@@ -102,9 +102,13 @@ class CredsManager:
 
 # return current version
 def get_version():
-    with open('version.yaml', "r") as f:
-        data = yaml.load(f, Loader=yaml.FullLoader)
-    return data['version']
+    try:
+        with open('gitmanager/version.yaml', "r") as f:
+            data = yaml.load(f, Loader=yaml.FullLoader)
+    except Exception as e:
+        print(e)
+    else:
+        return data['version']
 
 
 def print_header():
