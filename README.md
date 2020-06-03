@@ -1,4 +1,4 @@
-# gitmanager
+# Git Manager Tool
 Console tool for manage projects on github/gitlab
 
 ## Installation
@@ -21,7 +21,11 @@ First time ask for link of your repo, for example: https://github.com/katmai1/gi
 
 ## Development
 
-How to generate a new version
+Requeriments for developers
+- `pip install --upgrade setuptools wheel twine`
+
+### How to generate a new version
+
 
 - Assign version number on file [setup.py](setup.py)
 - Commit all changes

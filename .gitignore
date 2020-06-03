@@ -2,3 +2,5 @@
 /.vscode/
 /gitmanager/__pycache__/
 /gitmantool.egg-info/
+/build/
+/dist/
