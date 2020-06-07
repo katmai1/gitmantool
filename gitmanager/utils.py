@@ -4,7 +4,7 @@ import sys
 
 from colorama import Fore, Style
 
-VERSION = 0.6
+VERSION = 0.7
 
 
 # ─── SETTINGS CLASS ─────────────────────────────────────────────────────────────
